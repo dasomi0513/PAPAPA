@@ -1,0 +1,482 @@
+<!-- filepath: index.html -->
+<!DOCTYPE html>
+<!-- saved from url=(0036)https://rapngeacher.github.io/prize/ -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>최고의 어무니상</title>
+    <link href="./최고의 어무니상_files/css2" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary-color: #7209b7;
+            --accent-color: #f72585;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+            padding: 16px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+        
+        .image-container {
+            position: relative;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        #baseImage {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .controls {
+            margin-bottom: 20px;
+        }
+        
+        .file-input-wrapper {
+            position: relative;
+            margin-bottom: 16px;
+        }
+        
+        .file-input-wrapper input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        
+        .file-input-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .file-input-button:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .overlay-settings {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+        
+        .setting-group {
+            margin-bottom: 12px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+        
+        input[type="range"] {
+            width: 100%;
+        }
+        
+        .range-value {
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        button {
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 1rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        
+        button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .preview-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 24px;
+        }
+        
+        #previewCanvas {
+            max-width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 12px;
+            }
+            
+            .card {
+                padding: 16px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .overlay-settings {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+<style type="text/css">.resize-observer[data-v-8859cc6c]{position:absolute;top:0;left:0;z-index:-1;width:100%;height:100%;border:none;background-color:transparent;pointer-events:none;display:block;overflow:hidden;opacity:0}.resize-observer[data-v-8859cc6c] object{display:block;position:absolute;top:0;left:0;height:100%;width:100%;overflow:hidden;pointer-events:none;z-index:-1}</style><style type="text/css">x-vue-echarts{display:flex;flex-direction:column;width:100%;height:100%;min-width:0}
+.vue-echarts-inner{flex-grow:1;min-width:0;width:auto!important;height:auto!important}
+</style><style id="toast">
+#danji-toast {  min-width: 150px; position: fixed; right: 24px; bottom: 24px; text-align: right; z-index: 11100000 !important; }
+
+#danji-toast .toastWrap {
+  margin: 6px 0 0;
+  padding: 18px 0 15px;
+  // display: none;
+}
+
+.toast-html {
+  padding: 0px; margin: 0px; border: 0px; width: 300px; min-height: 200px;
+}
+
+.toast {
+  border: 1px solid #F1D031;
+  color: #444;
+  background: #FFFFA3;
+  box-shadow: 0 2px 3px #999;
+  padding: 18px 20px 15px 8px;
+  text-align: left;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  font-family: arial;
+  font-size: 13px;
+  white-space: pre;
+  position: relative;
+}
+
+#danji-toast b {
+  display: block;
+  position: absolute;
+  top: 3px;
+  right: 4px;
+  width: 12px;
+  height: 12px;
+  font: normal 12px/1 Arial, sans-serif;
+  text-align: right;
+  cursor: pointer;
+  text-shadow: #FFF 0 1px 0;
+}
+
+#danji-toast b:before {
+  content: "\2716";
+}
+
+.timerWrap {
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  overflow: hidden;
+  // border-radius: 5px;
+  // -moz-border-radius: 5px;
+  // -webkit-border-radius: 5px;
+}
+
+.timer {
+  display: block;
+  height: 4px;
+  width: 0;
+  background-color: #F1D031;
+}
+
+.c_btn{position: absolute;top: 0;right: 0;background: #1f2023;color: #fff; font-weight: 700;font-size: 12px;padding: 3px 6px;cursor: pointer;border-radius: 0px 0px 0px 5px}
+
+@keyframes b {
+    to {
+        transform: rotate(1turn)
+    }
+}
+
+.spinner-border {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    vertical-align: text-bottom;
+    border: .25em solid red;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: b .75s linear infinite
+}
+
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+    border-width: .2em
+}
+  </style></head>
+<body ap-style="">
+    <div class="container">
+        <h1></h1>
+        
+        <div class="card">
+            <h2 class="card-title">최고의 어무니 상</h2>
+            <div class="image-container">
+                <img id="baseImage" src="./최고의 어무니상_files/abujisang.png" alt="기본 이미지">
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2 class="card-title">이미지 파일 선택</h2>
+            <div class="controls">
+                <div class="file-input-wrapper">
+                    <div class="file-input-button">이미지 파일 선택</div>
+                    <input type="file" id="overlayImageInput" accept="image/*">
+                </div>
+            </div>
+        </div>
+        
+        <div class="card" id="settingsCard" style="display: none;">
+            <h2 class="card-title">3. 이미지 위치 및 크기 조절</h2>
+            <div class="overlay-settings">
+                <div class="setting-group">
+                    <label for="posX">가로 위치 (X)</label>
+                    <input type="range" id="posX" min="0" max="540" value="142">
+                    <span id="posXValue" class="range-value">142px</span>
+                </div>
+                <div class="setting-group">
+                    <label for="posY">세로 위치 (Y)</label>
+                    <input type="range" id="posY" min="0" max="850" value="228">
+                    <span id="posYValue" class="range-value">228px</span>
+                </div>
+                <div class="setting-group">
+                    <label for="width">너비</label>
+                    <input type="range" id="width" min="50" max="540" value="251">
+                    <span id="widthValue" class="range-value">251px</span>
+                </div>
+                <div class="setting-group">
+                    <label for="height">높이</label>
+                    <input type="range" id="height" min="50" max="850" value="263">
+                    <span id="heightValue" class="range-value">263px</span>
+                </div>
+            </div>
+            
+            <div class="preview-container">
+                <canvas id="previewCanvas" width="540" height="850"></canvas>
+            </div>
+            
+            <div class="controls" style="margin-top: 24px;">
+                <button id="saveButton">고품질 이미지로 저장</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 전역 변수 설정
+        let baseImage = document.getElementById('baseImage');
+        let overlayImageData = null;
+        let canvas = document.createElement('canvas');
+        let ctx = canvas.getContext('2d');
+        let previewCanvas = document.getElementById('previewCanvas');
+        let previewCtx = previewCanvas.getContext('2d');
+        
+        // 이미지 위치 및 크기 변수
+        let posX = 142;
+        let posY = 228;
+        let overlayWidth = 251;
+        let overlayHeight = 263;
+        
+        // 기본 이미지가 로드되면 범위 슬라이더 최대값 설정
+        baseImage.onload = function() {
+            if (!baseImage.naturalWidth || !baseImage.naturalHeight) {
+                alert('기본 이미지가 올바르게 로드되지 않았습니다. 이미지 파일 경로와 확장자를 다시 확인하세요.');
+                return;
+            }
+            document.getElementById('posX').max = baseImage.naturalWidth;
+            document.getElementById('posY').max = baseImage.naturalHeight;
+            document.getElementById('width').max = baseImage.naturalWidth;
+            document.getElementById('height').max = baseImage.naturalHeight;
+            
+            // 초기 미리보기
+            updatePreview();
+        };
+        
+        // 오버레이 이미지 업로드
+        document.getElementById('overlayImageInput').addEventListener('change', function(e) {
+            if (e.target.files && e.target.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(event) {
+                    const img = new Image();
+                    img.onload = function() {
+                        overlayImageData = img;
+                        document.getElementById('settingsCard').style.display = 'block';
+                        updatePreview();
+                    };
+                    img.src = event.target.result;
+                };
+                
+                reader.readAsDataURL(e.target.files[0]);
+            }
+        });
+        
+        // 위치 및 크기 슬라이더 이벤트 리스너
+        document.getElementById('posX').addEventListener('input', function(e) {
+            posX = parseInt(e.target.value);
+            document.getElementById('posXValue').textContent = posX + 'px';
+            updatePreview();
+        });
+        
+        document.getElementById('posY').addEventListener('input', function(e) {
+            posY = parseInt(e.target.value);
+            document.getElementById('posYValue').textContent = posY + 'px';
+            updatePreview();
+        });
+        
+        document.getElementById('width').addEventListener('input', function(e) {
+            overlayWidth = parseInt(e.target.value);
+            document.getElementById('widthValue').textContent = overlayWidth + 'px';
+            updatePreview();
+        });
+        
+        document.getElementById('height').addEventListener('input', function(e) {
+            overlayHeight = parseInt(e.target.value);
+            document.getElementById('heightValue').textContent = overlayHeight + 'px';
+            updatePreview();
+        });
+        
+        // 미리보기 업데이트 함수
+        function updatePreview() {
+            if (!baseImage.complete) return;
+            
+            previewCanvas.width = baseImage.naturalWidth;
+            previewCanvas.height = baseImage.naturalHeight;
+            
+            previewCtx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
+            previewCtx.drawImage(baseImage, 0, 0);
+            
+            if (overlayImageData) {
+                previewCtx.drawImage(
+                    overlayImageData, 
+                    posX, 
+                    posY, 
+                    overlayWidth, 
+                    overlayHeight
+                );
+                previewCanvas.style.display = 'block';
+            }
+        }
+        
+        // 결과 저장
+        document.getElementById('saveButton').addEventListener('click', function() {
+            if (!overlayImageData) {
+                alert('오버레이 이미지를 먼저 선택해주세요.');
+                return;
+            }
+            if (!baseImage.complete || !baseImage.naturalWidth || !baseImage.naturalHeight) {
+                alert('기본 이미지가 올바르게 로드되지 않았습니다.');
+                return;
+            }
+            // 고품질 렌더링을 위한 캔버스 설정
+            canvas.width = baseImage.naturalWidth;
+            canvas.height = baseImage.naturalHeight;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // 기본 이미지 그리기
+            ctx.drawImage(baseImage, 0, 0);
+            // 오버레이 이미지 그리기
+            ctx.drawImage(
+                overlayImageData, 
+                posX, 
+                posY, 
+                overlayWidth, 
+                overlayHeight
+            );
+            
+            // 고품질 PNG로 저장
+            try {
+                const imageData = canvas.toDataURL('image/png', 1.0);
+                
+                // 다운로드 링크 생성
+                const link = document.createElement('a');
+                link.download = 'combined-image.png';
+                link.href = imageData;
+                
+                // 링크 클릭 시뮬레이션하여 다운로드
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } catch (error) {
+                console.error('이미지 저장 중 오류 발생:', error);
+                alert('이미지 저장 중 오류가 발생했습니다.\n' + error);
+            }
+        });
+    </script>
+
+
+<div class="ap-ext ap-ext-taobao_search_by_image"><div translate="no" class="ap-base ap-base--ltr ap-theme--dark"><div><div class="ap-toolbar ap-toolbar--left ap-toolbar--collapse"><div class="ap-toolbar-tab ap-toolbar-tab-expandToggle"><!----><div role="tab" class="ap-toolbar-tab-tab"><div class="ap-toolbar-tab-tab__inner"><i class="ap-toolbar-expand-toggle"></i></div></div></div><div class="ap-toolbar__inner"><!----><div class="ap-toolbar-tab-Dropdown ap-toolbar-tab ap-toolbar-tab-Dropdown"><!----><div role="tab" class="ap-toolbar-tab-tab"><div class="ap-toolbar-tab-tab__inner"><i class="ap-icon-drop-up-list"></i></div></div></div><div class="ap-toolbar-tab ap-toolbar-tab-Bulletin" data-read="false"><!----><div role="tab" class="ap-toolbar-tab-tab"><div class="ap-toolbar-tab-tab__inner"><div><div class="ap-notification-cover" data-action="listDetails"><img src="./최고의 어무니상_files/tabbar-icon-message-dark.png" width="60" height="60" style="display:none" data-theme="dark" data-read="true"><img src="./최고의 어무니상_files/tabbar-icon-message-dark.png" width="60" height="60" style="display: block;" data-theme="dark" data-read="false"><img src="./최고의 어무니상_files/tabbar-icon-message-light.png" width="60" height="60" style="display:none" data-theme="light" data-read="true"><img src="./최고의 어무니상_files/tabbar-icon-message-light.png" width="60" height="60" style="display:none" data-theme="light" data-read="false"></div></div></div></div></div></div><!----><div><!----><div class="ap-sbi"><div class="ap-sbi-btn-search-wrapper" style="cursor: pointer; z-index: 2147483647; position: absolute; top: 138.719px; left: 435.5px;"><div class="ap-sbi-btn-search"><i class="ap-sbi-btn-search__icon ap-icon-search"></i><span class="ap-sbi-btn-search__txt">AliPrice</span></div><div class="ap-sbi-options"><div class="ap-sbi-options__label"><i class="ap-sbi-options__icon ap-icon-vertical-ellipsis"></i></div><!----></div></div><!----><div class="ap-sbi-aside"><!----><div class="ap-sbi-aside-btn-minimize" style="display: none;"><img src="https://ramiteacher.github.io/prize/" class="ap-sbi-img-thumb"><i class="ap-sbi-aside-btn-minimize__icon ap-icon-chevron-right"></i></div><!----></div><!----></div></div><!----><div><div class="ap-dlimgs-modal-wrapper"><!----></div><div class="ap-dlimgs-msg-modal"><!----></div><div><!----></div><div><div class="ap-dlimgs-export"><!----></div></div><div><div class="ap-dlimgs-rename-modal"><!----></div></div><!----></div><div></div><div></div><div></div><div></div><!----><div></div><div><!----></div><div></div><div></div><!----><!----><!----><div></div><div></div><div><!----></div><div></div><div class="ap-sub-favorite-modal" config="[object Object]"><!----></div><!----><!----><style id="J_1749722489015" type="text/css">.ap-ext-taobao_search_by_image .ap-toolbar-tab-Bulletin .ap-toolbar-tab-tab,.ap-ext-taobao_search_by_image .ap-toolbar-tab-Bulletin .ap-toolbar-tab-tab__inner{padding:0!important;background:none!important}.ap-ext-taobao_search_by_image .ap-bulletin.ap-bulletin-toggle{display:none}.ap-ext-taobao_search_by_image .ap-toolbar .ap-bulletin.ap-bulletin-toggle{display:block}.ap-ext-taobao_search_by_image .ap-theme--dark .ap-notifications__list{display:flex;display:-ms-flexbox;flex-direction:column;-ms-flex-direction:column;flex-direction:column}.ap-ext-taobao_search_by_image .ap-theme--dark .ap-notifications__item{margin-bottom:10px}.ap-ext-taobao_search_by_image .ap-theme--dark .ap-notifications__item-link{background-color:#3e3e3e;border-radius:6px;padding:4px 0;border:solid 1px #3e3e3e;display:flex;display:-ms-flexbox;align-items:center;-ms-flex-align:center}.ap-ext-taobao_search_by_image .ap-theme--dark .ap-notifications__item-link:hover{border-color:#fd860e}.ap-ext-taobao_search_by_image .ap-theme--dark .ap-notifications__item-icon{width:60px;height:60px;flex-shrink:0;margin:0 4px;border-radius:6px;overflow:hidden}.ap-ext-taobao_search_by_image .ap-theme--dark .ap-notifications__item-icon img{width:100%;height:100%}.ap-ext-taobao_search_by_image .ap-theme--dark .ap-notifications__item-info{margin:0 6px}.ap-ext-taobao_search_by_image .ap-theme--dark .ap-notifications__item-title{font-size:14px;font-weight:600;color:#ccc;line-height:1.5}.ap-ext-taobao_search_by_image .ap-theme--dark .ap-notifications__item-title.text-orange{color:#fd860e}.ap-ext-taobao_search_by_image .ap-theme--dark .ap-notifications__item-title.text-green{color:#04c446}.ap-ext-taobao_search_by_image .ap-theme--dark .ap-notifications__item-desc{font-size:12px;font-weight:400;color:#ccc;display:-webkit-box;max-height:36px;overflow:hidden;line-height:18px;transition:all .2s ease-in-out;-webkit-line-clamp:2;-webkit-box-orient:vertical}.ap-ext-taobao_search_by_image .ap-theme--light .ap-notifications__list{display:flex;display:-ms-flexbox;flex-direction:column;-ms-flex-direction:column;flex-direction:column}.ap-ext-taobao_search_by_image .ap-theme--light .ap-notifications__item{margin-bottom:10px}.ap-ext-taobao_search_by_image .ap-theme--light .ap-notifications__item-link{background-color:#fff;border-radius:6px;padding:4px 0;border:solid 1px #eee;display:flex;display:-ms-flexbox;align-items:center;-ms-flex-align:center}.ap-ext-taobao_search_by_image .ap-theme--light .ap-notifications__item-link:hover{border-color:#fd860e}.ap-ext-taobao_search_by_image .ap-theme--light .ap-notifications__item-icon{width:60px;height:60px;flex-shrink:0;margin:0 4px;border-radius:6px;overflow:hidden}.ap-ext-taobao_search_by_image .ap-theme--light .ap-notifications__item-icon img{width:100%;height:100%}.ap-ext-taobao_search_by_image .ap-theme--light .ap-notifications__item-info{margin:0 6px}.ap-ext-taobao_search_by_image .ap-theme--light .ap-notifications__item-title{font-size:14px;font-weight:600;color:#777;line-height:1.5}.ap-ext-taobao_search_by_image .ap-theme--light .ap-notifications__item-title.text-orange{color:#fd860e}.ap-ext-taobao_search_by_image .ap-theme--light .ap-notifications__item-title.text-green{color:#04c446}.ap-ext-taobao_search_by_image .ap-theme--light .ap-notifications__item-desc{font-size:12px;font-weight:400;color:#777;display:-webkit-box;max-height:36px;overflow:hidden;line-height:18px;transition:all .2s ease-in-out;-webkit-line-clamp:2;-webkit-box-orient:vertical}.ap-ext-taobao_search_by_image .ap-toolbar-tab-Bulletin .ap-toolbar-tab-tab__inner .ap-notification-cover {width: 60px;height: 60px;background-position: center center;background-repeat: no-repeat;}.ap-ext-taobao_search_by_image .ap-theme--dark .ap-toolbar-tab-Bulletin[data-read="true"] .ap-toolbar-tab-tab__inner .ap-notification-cover{background-image: url("https://api.chnprice.com/static/img/qipao-theme/tabbar-icon-message-dark.png ");}.ap-ext-taobao_search_by_image .ap-theme--dark .ap-toolbar-tab-Bulletin[data-read="false"] .ap-toolbar-tab-tab__inner .ap-notification-cover{background-image: url("https://api.chnprice.com/static/img/qipao-theme/tabbar-icon-message-dark.png");}.ap-ext-taobao_search_by_image .ap-theme--light .ap-toolbar-tab-Bulletin[data-read="true"] .ap-toolbar-tab-tab__inner .ap-notification-cover{background-image: url("https://api.chnprice.com/static/img/qipao-theme/tabbar-icon-message-light.png");}.ap-ext-taobao_search_by_image .ap-theme--light .ap-toolbar-tab-Bulletin[data-read="false"] .ap-toolbar-tab-tab__inner .ap-notification-cover{background-image: url("https://api.chnprice.com/static/img/qipao-theme/tabbar-icon-message-light.png");}.ap-ext-taobao_search_by_image .ap-sbi-btn-search-wrapper {z-index: 2147483647 !important;width: 33px;height: 33px;line-height: 30px;}/*Unordered users hide cross-border direct purchases 20250120 by jjlin*/.ap-ext-taobao_search_by_image .ap-toolbar-tab-ds1688, .ap-ext-taobao_search_by_image .ap-aliprice-agent-btns {display: none !important;}</style></div></div><div id="Sch_p"></div><div id="danji-toast"></div></body></html>
